@@ -1,0 +1,20 @@
+#### Notes from FrontEndMasters Meteor course
+
+# Meteor Notes
+
+## Setup
+
+Installing Meteor: [Meteor installation page](https://www.meteor.com/install)
+> Follow the setup that Meteor provides, depending on your operating system.
+
+## Creating a new Meteor app on your computer
+
+Go to the directory that you would like to save the Meteor app. Open that particular folder in terminal and type: `meteor create` and then the app name. So in this instance it would be `meteor create app` or `meteor create reddit`.
+
+Type in `ls` or `dir` to see that the app is inside the folder and then you can `cd` into the Meteor app directory
+
+
+##
+
+
+## Using Templates
