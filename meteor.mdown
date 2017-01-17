@@ -14,7 +14,58 @@ Go to the directory that you would like to save the Meteor app. Open that partic
 Type in `ls` or `dir` to see that the app is inside the folder and then you can `cd` into the Meteor app directory
 
 
-##
+## What is inside the meteor directory
+
+You should get something inside the meteor app folder something like this
+
+> app
+> > client
+> > > main.css
+> > > main.html
+> > > main.css
+
+> > package.json
+
+> > server
+> > > main.js
+
+## Starting the application
+
+Just type in `meteor` in the terminal, and the application would start up.
+
+>If you get an error that says `Error: The babel-runtime npm package could not be found in your node_modules`, just install it by typing in:
+>>`meteor npm install --save babel-runtime`
+
+
+>If you get an error that it can't listen on port 3000, you can run it on another port. In this instance I want to use the port 4000, just type:
+>>`meteor -p 4000`
+
+>to run the meteor app on port 4000
+
+
+The greatest thing about meteo
 
 
 ## Using Templates
+
+If you look inside the client/main.html file, you can see that is not a normal HTML page. Although you got a HEAD and BODY section, you don't have the HTML tags or any META tags that you would normally need for a HTML page. That's because Meteor would automatically do this for you when you launch the server. In more technical terms, Meteor actually takes this HTML file and compiles the HTML file to be more readable to the browswer.
+
+You can also see another tag inside the HTML file that there is a template tag. A template is just a unit of the User Interface (UI). An analogy of a template in Meteor is a function in a JavaScript class. Both JavaScript function and Meteor Templates organise code structure and functionalities.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
