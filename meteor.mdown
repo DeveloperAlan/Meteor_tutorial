@@ -43,7 +43,7 @@ Just type in `meteor` in the terminal, and the application would start up.
 >to run the meteor app on port 4000
 
 
-The greatest thing about meteo
+One of the greatest things about meteor is that you don't need to refresh the page manually. The Meteor packages that have been installed already can do this for you.
 
 
 ## Using Templates
@@ -52,20 +52,29 @@ If you look inside the client/main.html file, you can see that is not a normal H
 
 You can also see another tag inside the HTML file that there is a template tag. A template is just a unit of the User Interface (UI). An analogy of a template in Meteor is a function in a JavaScript class. Both JavaScript function and Meteor Templates organise code structure and functionalities.
 
+For this example, let's delete the existing code and leave the empty head and body tags and create a template called 'Layout'. We can place anything inside the template that is HTML, for example a `<h1>` tag.
 
+To use the template tag, we need to use a templating engine to render the template on the browser, as the browswer doesn't know how to render the template by itself. One templating engine we could use is Spacebars, Meteor's own templating engine. This templating engine is close to Jade and Handlebars.
 
+So one thing we can tell Spacebars to do is to render out the Layout template. In the documentation for Spacebars, you can render out the template by typing `{{> Layout}}`. The opening and closing `{{}}` is for Spacebars to recognize that it is Spocebars syntax, the carrot symbol is the inclusion operator so that Spacebars knows we need to add something to the page and the Layout name is to use the Layout template. This entire syntax is called the inclusion helper.
 
+The resulting code should look like this:
 
+> Code - main.html
+```
+<head>
+  <title>app</title>
+</head>
 
+<body>
+  {{> Layout}}
+</body>
 
+<template name="Layout">
+  <h1>Alan's Meteor site</h1>
+</template>
+```
 
+One feature that reddit has is the comment section. We can create the comment section by using a different helper called the block helper. You can use any of the Spacebar helpers anywhere, doesn't have to be in the body as it can be in the template itself.
 
-
-
-
-
-
-
-
-
-
+We can call a function that Meteor provides to us called 'each'. What this function does it that it will iterate over a list of items and then will print out the items according to what the list contains.
