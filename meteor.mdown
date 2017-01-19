@@ -75,6 +75,69 @@ The resulting code should look like this:
 </template>
 ```
 
-One feature that reddit has is the comment section. We can create the comment section by using a different helper called the block helper. You can use any of the Spacebar helpers anywhere, doesn't have to be in the body as it can be in the template itself.
+One feature that reddit has is the comment section. We can create the comment section by using a different helper called the block helper. A helper is a function or a class that gives you some functionality which isn't the main goal of the application. One example of a helper is a function that returns the Date. Another can be a class that adds certain numbers. You can use any of the Spacebar helpers anywhere, doesn't have to be in the body as it can be in the template itself.
 
 We can call a function that Meteor provides to us called 'each'. What this function does it that it will iterate over a list of items and then will print out the items according to what the list contains.
+
+So inside of the template, we can iterate over the list by typing
+
+> Code - main.html
+```
+<ul>
+{{#each items}}
+  <li>Something that we haven't discovered yet, dw about it</li>
+{{else}}
+  <li>There's nothing in this list yet</li>
+{{/each}}
+```
+
+Spacebars and other templating libraries have the same logic as JavaScript but not all templating library has the same syntax as JS. One of the templating engines called EJS, which we won't cover in this course.
+
+The above code looks much alike a if statement, instead it's looking if the variable items has any items inside. If so, print out the line depending on how many items there is, otherwise print that there is nothing in the item if there's no items.
+
+The resulting code should look like this:
+
+```
+<head>
+  <title>app</title>
+</head>
+
+<body>
+  {{> Layout}}
+</body>
+
+<template name="Layout">
+  <h1>Alan's Meteor site</h1>
+
+  <ul>
+  {{#each items}}
+    <li>lol</li>
+  {{else}}
+    <li>Damnit there's nothing</li>
+  {{/each}}
+  </ul>
+</template>
+```
+
+Notice that we don't have a variable items anywhere in our HTML file. We'll have to add that manually in a JS file called main.js inside the client folder. This is where all the JavaScript files are that are given to the client.
+
+You can delete everything inside of the main.js file.
+
+To render out some items inside of the HTML page based on the items inside the items object, you'll need to reference the Layout that's inside the HTML page. Start typing in `Template.Layout`, which would reference the Template object and get the Layout instance inside of the Template object.
+
+Since we are using helpers, we'll need to reference the helpers object inside of Template Layout which Meteor would automatically pick up. We can create any function we would want, but since we are saying in the HTML file to use the each helper over the items object, we can call the function 'items'. That function can return an array of items.
+
+Example can be something like this:
+```
+Template.Layout.helpers({
+  items: function() {
+    return [
+      "Peanut Butter",
+      "Strawberry Jam",
+      "Nutella"
+    ]
+  }
+})
+```
+
+When you save and refresh the browser, you can see that the 
