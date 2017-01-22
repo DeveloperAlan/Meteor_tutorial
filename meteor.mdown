@@ -140,4 +140,100 @@ Template.Layout.helpers({
 })
 ```
 
-When you save and refresh the browser, you can see that the 
+When you save and refresh the browser, you can see that the number of times that it has printed the hardcoded HTML code is the same number of items inside the items helper function, which is three. 
+
+If we want to display the foods onto the webpage. we can use the Spacebars syntax to render out all the items. Instead of using the hardcoded code inside the each block helper, we can use the {{}} syntax and type in what we need to render. In this case, we can use {{items}} to fill in the <li> tag.
+
+The HTML code should look something like this:
+```
+<template name="Layout">
+  <h1>Alan's Meteor site</h1>
+
+  <ul>
+  {{#each items}}
+    <li>{{items}}</li>
+  {{else}}
+    <li>Damnit there's nothing</li>
+  {{/each}}
+  </ul>
+</template>
+```
+
+When we save the file and checkout the page, we can see that the items are being rendered to the page, except this time all the items are being printed on the same line and each HTML list item is being print as many as there is items. This is because we told the Spacebars compiler to print out all the items rather than each individual item. To print each individual item, we'll need to change up the JavaScript and HTML file to do so.
+
+Inside of the JavaScript file you can change the value inside the array of the return statment into an array of objects, known in Meteor as a data context (but I called them just normal JavaScript objects). So from:
+```
+return [
+      "Peanut Butter",
+      "Strawberry Jam",
+      "Nutella"
+]
+```
+
+turns into
+```
+return [
+      { item: "Peanut Butter"},
+      { item: "Strawberry Jam"},
+      { item: "Nutella"}
+]
+```
+
+Now we can reference the key/property `item` inside of the objects. In the HTML file in the each block helper we can now change from `<li>{{items}}</li>` to `<li>item</li>`
+
+The final code should look similar to this
+```
+> main.js
+Template.Layout.helpers({
+  items: function() {
+    return [
+      { item: "Peanut Butter"},
+      { item: "Strawberry Jam"},
+      { item: "Nutella"}
+    ]
+
+
+  }
+})
+```
+
+```
+> main.html 
+<head>
+  <title>app</title>
+</head>
+
+<body>
+  {{> Layout}}
+</body>
+
+<template name="Layout">
+  <h1>Alan's Meteor site</h1>
+
+  <ul>
+  {{#each items}}
+    <li>{{item}}</li>
+  {{else}}
+    <li>Damnit there's nothing</li>
+  {{/each}}
+  </ul>
+</template>
+```
+
+When you save the files and go back to your browser, you'll see the web page being updated and the items in their own list item.
+
+You can add as many key values as you want, such as dates, username, messages, chatrooms, etc. All you need to do is to add that inside of the block helper return statement and add that reference to the HTML file
+
+Just realise that the items function we passed in is a helper itself, so in JavaScript we can kind of model the function call like this:
+```
+each(items())
+```
+
+We do a function call to the items and with the answer that it returned for us we will use that as a parameter for the each function. The each helper is provided by Meteor and the items helper is a function that we created ourselves.
+
+
+## Creating collections
+We can create real data inside our Meteor app rather than hard coding it so that other people can use our app. To do this we need to use a 
+
+
+

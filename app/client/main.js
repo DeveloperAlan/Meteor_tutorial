@@ -6,9 +6,11 @@
 Template.Layout.helpers({
   items: function() {
     return [
-      "Peanut Butter",
-      "Strawberry Jam",
-      "Nutella"
+      { item: "Peanut Butter"},
+      { item: "Strawberry Jam"},
+      { item: "Nutella"}
     ]
+
+
   }
 })
