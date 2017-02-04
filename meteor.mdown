@@ -233,7 +233,55 @@ We do a function call to the items and with the answer that it returned for us w
 
 
 ## Creating collections
-We can create real data inside our Meteor app rather than hard coding it so that other people can use our app. To do this we need to use a 
+We can create real data inside our Meteor app rather than hard coding it so that other people can use our app. To do this we need to use a database called MongoDB which is provided by Meteor out of the box.
 
+[MongoDB](https://www.mongodb.com/) is a free and open source document-oriented database. MongoDB is a NoSQL database, meaning it would use JSON-like documents, much like the JavaScript object we have been doing. The main thing that MongoDB does (as well as other database technologies) is to store information, like user data, files, and data entries. Databases strengths are to update information dynamically and able to do it regularly, unlike static files like JavaScript.
+
+To create a database, MongoDB and Meteor provides a table called collection. We can can create this by typing. 
+
+```
+Items = new Mongo.Collection('items');
+```
+
+When we create this collection, we've placed this in the client main.js, meaning that this database would only be executed in the client's browser and not in the server. We will cover this shortly.
+
+Once you saved the file, the browser will automatically refresh the page and if you take a peak at the console and type the name of the collection (in this instance, `Items`), you can see what the MongoDB collection contains, such as methods you can use to retrieve information back to you. One of the function is called `find`. When you execute the find command (`Items.find()`), the browser will return the cursor. This command represents a query that we can execute to the database and not to the app we created itself. If we did the following command 
+
+```
+cursor = Items.find()
+cursor.fetch()
+```
+
+you would see an empty array in the console, this is because we haven't actually added in any information into the database as of yet. However, it is the same type of array that we used in the items helper to return the food items.
+
+So now, instead of returning the hardcoded food items inside the main.js code, we can return the cursor. The code should look like this:
+```
+Template.Layout.helpers({
+    items: function() {
+        return Comments.find();
+    }
+})
+```
+
+Remember that when we did the Items.find() and assigned that value to the variable cursor, that it is a regular JavaScript object with additional functions.
+
+When we save and refresh the page, remember that there is no items in the collection, hence there is no items displayed. We can insert some data by going into the Chrome Developer tools console, which is only a debugging feature and not used in production websites. To insert an item inside the database, you would need to type this in the JavaScript console.
+
+```
+Items.insert({item: "This is item 1"})
+```
+
+When we press enter you should see the following id for the particular insert, and also a log where it says: `insert failed: Method '/items/insert' not found`. 
+
+To dive into a little theory here, the code that we entered inside the developer console adds another item to the database, this being a new item. Meteor provides to us two databases, one for the client and one for the server. The server database is running MongoDB and the client database is a variant of MongoDB called minimongo. The server database is the one that's the most important part of the web application, because that will contain all the user, personal and content data. The client database isn't a copy of the server database. What the client database does it have a relative copy of the server database. Meaning that the client only takes information that is needed for the page to run. For example, if the user is in the content page, the user won't need to have the user profile running with all the settings. Rather the web page would only request items that is in the content page. 
+
+TL:DR The client is running a slimmed down version of the server database which is updated whenever the server database is updated.
+
+You should notice by now that there is a server folder inside the web app. Inside that server folder is a main.js file. We would need to add a server database here. Inside the `Meteor.startup` function, add the following code:
+```
+Meteor.startup(() => {
+  Items = new Mongo.Collection('items');
+});
+```
 
 

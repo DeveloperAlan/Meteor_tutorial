@@ -2,15 +2,10 @@
 // import { ReactiveVar } from 'meteor/reactive-var';
 //
 // import './main.html';
+Items = new Mongo.Collection('items');
 
 Template.Layout.helpers({
   items: function() {
-    return [
-      { item: "Peanut Butter"},
-      { item: "Strawberry Jam"},
-      { item: "Nutella"}
-    ]
-
-
+    return Items.find()
   }
 })
