@@ -4,6 +4,7 @@
 
 <body>
   {{> Layout}}
+  {{> ItemAdd}}
 </body>
 
 <template name="Layout">
@@ -16,4 +17,11 @@
     <li>Damnit there's nothing</li>
   {{/each}}
   </ul>
+</template>
+
+<template name="ItemAdd">
+  <form>
+    <input type="text" name="item" autoFocus placeholder="Add an item..." />
+    <input type="submit" value="Add" />
+  </form>
 </template>

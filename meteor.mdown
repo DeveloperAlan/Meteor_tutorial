@@ -65,11 +65,9 @@ The resulting code should look like this:
 <head>
   <title>app</title>
 </head>
-
 <body>
   {{> Layout}}
 </body>
-
 <template name="Layout">
   <h1>Alan's Meteor site</h1>
 </template>
@@ -283,5 +281,48 @@ Meteor.startup(() => {
   Items = new Mongo.Collection('items');
 });
 ```
+
+This will add the MongoDB server database to the Meteor server app. Now the client minimongo database can now communicate with the backend server, which contains MongoDB itself. 
+
+Since minimongo is reliant on the server's MongoDB, we can now insert the collection into the JavaScript console in our web app. You can now type in the following command inside the Chrome developer tools:
+```
+Items.insert({item: "This is item 1"})
+```
+
+When you enter the following command you would notice that the web page/user interfaceinstantly updated with your command. Pretty cool huh?
+
+This works by saving the function call that you've typed inside the Chrome Developers tools which saves the information into minimongo (which the database for minimongo goes on the client side). Minimongo accepts this request and then asks the server database to save this information so all the client can now view this information. Again, this only works when the client and the server has their respective database.
+
+This is called a reactive interface, where the user interface updates in response to the change in data from the client/server database. 
+
+This is partially thanks the the function `Items.find()`, which is the reactive variable/source. This reactive variable (Items.find()) changes when the data changes.
+
+Although there is a reactive variable, we also need to do something with the reactive variable, such as to render out the variable or to use the variable to compute/calculate a formula, or anything between those lines. Inside the `Template.Layout.helper` is a function that returns the Items.find() (the reactive variable), hence it would show/render the variable in the web page. This is called reactive computations. A reactive computation is simply a block of code that will re-run whenever a reactive data-soruce inside it changes.
+
+You can enter as many commands as you want inside the Chrome Developer Tools, as MongoDB knows that you are inserting another item in the list without deleting the last item in the list. So if you did:
+
+```
+Items.insert({item: "This is item 2"})
+```
+
+you will see item 1 and item 2. If you need to reset the database you can close the server and then type `meteor reset` to clear the database with no items.
+
+##Handling Events
+It's pretty cool that we can add items using the Chrome Developer Tools. However, for a normal user to use the website, they would need some sort of input or form of some kind to use to add a item to the list. In HTML you can use a form element to create a form and inputs to create form elements for the form. For example, you can create a input text field and a submit button for a form. That particular form, when the button is clicked, will submit whatever is inside the input text field into the list that is displayed in the page.
+
+We can do this by creating another template inside our HTML page which can take user input. Start by creating the template itself with the name `ItemForm`. Inside that template, you would need to add the `<form>` tag with two inputs. One input is going to be the text field to add our form input, and the other is the submit button to submit the form into our list.
+
+```
+<template name="ItemForm">
+  <form>
+    <input type="text" name="item" autoFocus placeholder="Add an item..." />
+    <input type="submit" value="Add" />
+</template>
+
+
+
+
+
+
 
 
