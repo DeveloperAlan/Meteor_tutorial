@@ -9,3 +9,19 @@ Template.Layout.helpers({
     return Items.find()
   }
 })
+
+Template.ItemAdd.events({
+  'submit form': function(e, tmpl) {
+    e.preventDefault()
+
+    var form = tmpl.find('form');
+    var itemEl = tmpl.find('[name=item]');
+    var item = itemEl.value;
+
+    Items.insert({
+      item: item
+    });
+
+    form.reset();
+  }
+})

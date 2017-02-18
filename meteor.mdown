@@ -317,10 +317,38 @@ We can do this by creating another template inside our HTML page which can take 
   <form>
     <input type="text" name="item" autoFocus placeholder="Add an item..." />
     <input type="submit" value="Add" />
+  </form>
 </template>
+```
 
+Remember just like with all Meteor templates, we will need to call the template as well to render the template on the page. `{{> ItemForm}}`
 
+Currently, when we type something inside of the text field and we submit by clicking the submit button, it currently doesn't do anything because of HTML. Right now, when we submit, the HTML page refreshes and the URL link adds the `?item=item1` to the end of the URL. This is not Meteor specific as its more of a HTML standard that most web servers and clients use, especially when submitting a form.
 
+However, we would like to get this working. To do this, we would need to define an event handler that would handle the page when it an event fires. In this case, we want to fire a function when the user submits the form. 
+
+To do this, we would need to go into our `client/main,js` and add the following below our current code:
+
+tmpl represents an object of the instance of the template on the page
+```
+Template.ItemForm.events({
+  'submit form': function(e, tmpl) {
+    e.preventDefault();
+
+    var form = tmpl.find('form');
+    var itemEl = tmpl.find('[name=item]');
+    var item = itemEl.value;
+
+    Items.insert({
+      item: item
+    })
+
+    form.reset()
+  }
+})
+```
+
+When we save the code and then go back to our browser for refresh, we can enter the values that we want 
 
 
 
