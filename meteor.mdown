@@ -348,7 +348,27 @@ Template.ItemForm.events({
 })
 ```
 
-When we save the code and then go back to our browser for refresh, we can enter the values that we want 
+> Note: if you ever get confused about the code, you can always throw the `debugger` statement in the code to see whats happens. For example, if you through the `debugger` after the `e.preventDefault()`, in the console, you can type `e` or `tmpl` to see whats happening!
+
+When we save the code and then go back to our browser for refresh, we can enter the values that we want inside of the input text and when we click on the `Add` button, it would add the item to the list. You can keep adding items to the list and the items would still remain in the list. Refreshing the page would also keep the list there.
+
+Another thing you could do for Meteor which shows the great power of Meteor is to create another tab of Meteor (done by just creating another tab/window in Chrome and just going back to `locahost`), and place them side by side. When you submit an item in the form, both lists on both of those tabs will update. One of the magical things of Meteor is that when one client adds/creates something, it will get sent to the server and the server will send up the required updates that it has received, and this goes for all the clients. This would happen as long as all the clients have an internet connection up with the website. 
+
+Just note that events and helpers are two seperate things in Meteor and in JavaScript/Web Development in general. A helper is a function that is defined by the user or a language, like `Math.floor()`. Events ia a type of helper that is executed when a certain thing happens on the HTML page/DOM. So for instance: When a button is clicked, send the form. Hence, the browswer is the one that executes all the event functions you define and the helpers we can call whenever we want to in our code.
+
+If we ever need to create a non-persistant minimongo database for our client, that is, that would not communicate with the server at all. We can simply just create a mongo.collection that only exist in the client, rather than both the server and the client. That particular collection name can be anything, including null, since it is not being references from the server.
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
