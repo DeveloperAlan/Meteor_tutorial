@@ -12,7 +12,11 @@
 
   <ul>
   {{#each items}}
-    <li>{{item}}</li>
+    <li>
+      <p>{{item}}</p>
+      <p>{{timestamp}}</p>
+    </li>
+
   {{else}}
     <li>Damnit there's nothing</li>
   {{/each}}

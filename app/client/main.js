@@ -8,6 +8,9 @@ Template.Layout.helpers({
   items: function() {
     return Items.find()
   }
+  formatTimestap: function() {
+
+  }
 })
 
 Template.ItemAdd.events({
@@ -19,7 +22,8 @@ Template.ItemAdd.events({
     var item = itemEl.value;
 
     Items.insert({
-      item: item
+      item: item,
+      timestamp: new Date
     });
 
     form.reset();

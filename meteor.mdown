@@ -348,7 +348,9 @@ Template.ItemForm.events({
 })
 ```
 
-> Note: if you ever get confused about the code, you can always throw the `debugger` statement in the code to see whats happens. For example, if you through the `debugger` after the `e.preventDefault()`, in the console, you can type `e` or `tmpl` to see whats happening!
+> Note: if you ever get confused about the code, you can always throw the `debugger` statement in the code to see whats happens. For example, if you through the `debugger` after the `e.preventDefault()`, in the console, you can type `e` or `tmpl` to see whats happening! 
+
+> Also check out the MDN documentation on all the JavaScript events, like submit and click!
 
 When we save the code and then go back to our browser for refresh, we can enter the values that we want inside of the input text and when we click on the `Add` button, it would add the item to the list. You can keep adding items to the list and the items would still remain in the list. Refreshing the page would also keep the list there.
 
@@ -357,6 +359,91 @@ Another thing you could do for Meteor which shows the great power of Meteor is t
 Just note that events and helpers are two seperate things in Meteor and in JavaScript/Web Development in general. A helper is a function that is defined by the user or a language, like `Math.floor()`. Events ia a type of helper that is executed when a certain thing happens on the HTML page/DOM. So for instance: When a button is clicked, send the form. Hence, the browswer is the one that executes all the event functions you define and the helpers we can call whenever we want to in our code.
 
 If we ever need to create a non-persistant minimongo database for our client, that is, that would not communicate with the server at all. We can simply just create a mongo.collection that only exist in the client, rather than both the server and the client. That particular collection name can be anything, including null, since it is not being references from the server.
+
+##Adding Packages
+Meteor package management system works just like NPM. You can install other people's created packages like jQuery or a whole application into your Meteor project. It works just like NPM, as it piggybacks most of the internals and engineering from NPM, so it works just the way you learn NPM.
+
+One of the packages we going to add is MomentJS. MomentJS is a time/data formatter which essentially prettifies all the dates and times. We can install Moment by going to the Atmosphere website which contains all the Meteor packages that we want. Just search momentjs in the search bar on the website or you can also search it using the termainl by typing `meteor search momentjs` and the computer would tell you where to find it. You can also use `meteor show momentjs:moment` to then show whats the momentJS details. 
+
+To install, you can then use `meteor add momentjs:moment`, which would then add it to your meteor project files. To list all the installed moment files, just type in `meteor list`. You can also update meteor packages by typing `meteor update`.
+
+We're going to add the date to the items, since items should have a timestamp of when they have been submitted to the app's database. To do this we would need to add a property to the items Collection as well as a way to display this on the HTML. So inside our `client/main.js` file, we would need to edit the following:
+```
+Items.insert({
+  item: item,
+  timestamp: new Date
+})# 
+```
+
+and inside the `main.html` file:
+```
+{{#each items}}
+    <li>
+      <p>{{item}}</p>
+      <p>{{timestamp}}</p>
+    </li>
+
+{{else}}
+```
+
+We would also need to reset our server in order for the timestamp to show up in the web page. To do this, we need to shutdown our server by going on the terminal and clicking Control+C. We can then reset the database by typing `meteor reset` in our apps' directory. We then need to start the server again by typing in `meteor`. 
+
+We should see that there is nothing on the webpage because we have cleared our dtabase. Let's add an item by typing an item into the input text field. You should now see that there is the item name as well as the date for when we added our item.
+
+Now we should realise the the date looks kind of messy, nothing that website that Facebook and Reddit would display in their web apps when it comes to dates. That's because JavaScript has a way to format timestamps in it's own way, because some developers would like to have all the information for them to use, such as the timezone of what time is displayed and/or the seconds that is displayed. 
+
+Since we added the meteor package to our meteor app, we can now set up the timestamp that we want to be displayed.
+
+##Formatting a Timestamp
+Since `formatTimestamp` is a function that doesn't need to be formatted when an event (such as a button event) is fired (since we can use formatTimestamp even when the button isn't clicked), `formatTimestamp` would be a helper function. We would need to add the following code to `client/main.js`
+```
+Template.Layout.helpers({
+  items: function() {
+    return Items.find()
+  }
+  formatTimestamp: function(timestamp) {
+    
+  }
+})
+```
+
+There is a difference between the `items` and the `formatTimestamp` helper function. The formatTimestamp takes a parameter so that it can use the timestamp to render out a timestamp with the information that we want displayed.
+
+Say we do the following:
+```
+formatTimestamp: function(timestamp) {
+  debugger
+}
+```
+
+and we refresh the page. We should see Chrome show the debugger tool to us. This allows us to show what's happening inside the context of the code at where we are in reading the line of code. If we type `this` inside the Chrome console, we would be given the attributes of the item itself and it's properties, such as the item name and the timestamp. The this object will always point to the current object or instance of a class, not a function or a variable
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
