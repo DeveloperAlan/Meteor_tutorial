@@ -416,11 +416,37 @@ formatTimestamp: function(timestamp) {
 }
 ```
 
-and we refresh the page. We should see Chrome show the debugger tool to us. This allows us to show what's happening inside the context of the code at where we are in reading the line of code. If we type `this` inside the Chrome console, we would be given the attributes of the item itself and it's properties, such as the item name and the timestamp. The this object will always point to the current object or instance of a class, not a function or a variable
+and we refresh the page. We should see Chrome show the debugger tool to us. This allows us to show what's happening inside the context of the code at where we are in reading the line of code. If we type `this` inside the Chrome console, we would be given the attributes of the item itself and it's properties, such as the item name and the timestamp. The this object will always point to the current object or instance of a class, not a function or a variable.
 
+If we type in `this.timestamp` inside the debugger console, we would get the object timestamp back. Note that `this.timestamp` isn't the timestamp that is being referred from the arguments that we have called, but in the CommentList object. If we want to look what we are getting from the arguments, we can use the `arguments` object inside the debugger console to get the array of arguments that we have passed in as parameters.
 
+We can now format the timestamp that we want by typing in the following to change the timestamp that we are passing in:
+```
+formatTimestamp: function(timestamp) {
+  return moment(timestamp).calendar()
+}
+```
 
+We are using the moment function that was given to us when we installed the MomentJS package. Moment takes one parameter, being the timestamp, which we can then using another function to format the timestamp. We can use the calendar function to give us the time of when we posted our comment if the comment was posted on the same day as today, or a calendar for any other day. We know this calendar function because we can look inside the Moment documentation and see what the function would do. 
 
+It might be the first time you saw what the dot notation does, as we can concatenate two function together to give back one result. The equivalent and more verbose version of this particular functionality is:
+```
+formatTimestamp: function(timestamp) {
+  var newTimestamp = moment(timestamp)
+  return newTimestamp.calendar()
+}
+```
+
+The `moment(timestamp)` will return an object when the function has finished executing. Hence, we can use that returned object to create a new formatted timestamp.
+
+##Understanding HTTP
+One of the core technologies behind Meteor is HTTP. How this works is that a client/browser sends out a request to the server, using a text known as Hypertext Transfer Protocol (HTTP). The server will then send back HTTP again depending on what the client wants to do. The HTTP sends back a header and a body which contain information to tell what the browser does. The body usually contains HTML (if its a HTML file) or JS (if its a JavaScript file) and the header will give information on the information about the file, such as status and what type of file it is.
+
+To show you how to check what's happening during the HTTP processs, type in `curl -i http://127.0.0.1:3000` in the terminal and the computer would make a request to the server. The server would give back a HTTP response. It would bring back a status code of 200. It would give back some other header information such as the content type, date, etc. It will then also give the body, which should be the HTML. The browser will know how to render out this page from the HTTP response.
+
+Note: that the body is empty in the curl, we will see how that works in meteor.
+
+If you view the page source in Chrome you can see that's the same from the curl response that we had from the terminal. These script tags you can see from the view source is from the Meteor engine. These script tags represents a client package from meteor that we have installed, which would then render on the HTML page when the page is loaded. For example, we have mongo, DDP and minimongo as well as momentjs from a third party source. Mongo, DDP and the rest of the packages that comes with Meteor are core packages, packages that are made by the meteor team.
 
 
 

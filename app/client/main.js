@@ -7,9 +7,10 @@ Items = new Mongo.Collection('items');
 Template.Layout.helpers({
   items: function() {
     return Items.find()
-  }
-  formatTimestap: function() {
-
+  },
+  formatTimestamp: function(timestamp) {
+    var newTimestamp = moment(timestamp)
+    return newTimestamp.calendar()
   }
 })
 
