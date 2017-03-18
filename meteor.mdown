@@ -448,9 +448,10 @@ Note: that the body is empty in the curl, we will see how that works in meteor.
 
 If you view the page source in Chrome you can see that's the same from the curl response that we had from the terminal. These script tags you can see from the view source is from the Meteor engine. These script tags represents a client package from meteor that we have installed, which would then render on the HTML page when the page is loaded. For example, we have mongo, DDP and minimongo as well as momentjs from a third party source. Mongo, DDP and the rest of the packages that comes with Meteor are core packages, packages that are made by the meteor team.
 
+## HTTP and Polling
+The thing is with HTTP is that it is quite a old protocol, since it's been created when the internet was born. This was great during the early days, but gradually we got applications like Gmail and Facebook which would update our page everytime there is a change to the page that is needed, or a server wants to update our page. 
 
-
-
+Normally you could just refresh your page and you can get the newest information from the browser, but the people at Microsoft decided to create a technology known as AJAX (asynchronous JavaScript and XML), so we could use JavaScript to send a HTTP request to the server. This was great because we could use JavaScript anytime to send a request to the server rather than refreshing the page. Instead of clicking a button to ask for new data from the server, we could actually create a for loop which would keep asking for data for us. This is called polling
 
 
 
