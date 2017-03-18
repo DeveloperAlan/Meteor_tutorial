@@ -439,7 +439,7 @@ formatTimestamp: function(timestamp) {
 
 The `moment(timestamp)` will return an object when the function has finished executing. Hence, we can use that returned object to create a new formatted timestamp.
 
-##Understanding HTTP
+## Understanding HTTP
 One of the core technologies behind Meteor is HTTP. How this works is that a client/browser sends out a request to the server, using a text known as Hypertext Transfer Protocol (HTTP). The server will then send back HTTP again depending on what the client wants to do. The HTTP sends back a header and a body which contain information to tell what the browser does. The body usually contains HTML (if its a HTML file) or JS (if its a JavaScript file) and the header will give information on the information about the file, such as status and what type of file it is.
 
 To show you how to check what's happening during the HTTP processs, type in `curl -i http://127.0.0.1:3000` in the terminal and the computer would make a request to the server. The server would give back a HTTP response. It would bring back a status code of 200. It would give back some other header information such as the content type, date, etc. It will then also give the body, which should be the HTML. The browser will know how to render out this page from the HTTP response.
@@ -452,6 +452,11 @@ If you view the page source in Chrome you can see that's the same from the curl 
 The thing is with HTTP is that it is quite a old protocol, since it's been created when the internet was born. This was great during the early days, but gradually we got applications like Gmail and Facebook which would update our page everytime there is a change to the page that is needed, or a server wants to update our page. 
 
 Normally you could just refresh your page and you can get the newest information from the browser, but the people at Microsoft decided to create a technology known as AJAX (asynchronous JavaScript and XML), so we could use JavaScript to send a HTTP request to the server. This was great because we could use JavaScript anytime to send a request to the server rather than refreshing the page. Instead of clicking a button to ask for new data from the server, we could actually create a for loop which would keep asking for data for us. This is called polling
+
+## Web Sockets & DDP
+It's pretty frustrating that every time we have to keep calling the server for data and the server would have to respond everytime we have to send something back to the client. So the tech companies created something called web sockets, which instead just have a connection open (much like a game or a messaging app) which opens up a data connection between the client and the server so it doesn't have to close and restart the request again.
+
+
 
 
 
